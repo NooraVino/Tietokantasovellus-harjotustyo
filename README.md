@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [http://vino.users.cs.helsinki.fi/tikaso/]
-* [https://github.com/NooraVino/Tsoha-Bootstrap/tree/master/doc]
+* [file:///home/noora/Tsoha-Bootstrap/doc/dokumetti.pdf]
 
 ## Työn aihe
 
