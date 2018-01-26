@@ -11,8 +11,8 @@
   $routes->get('/listaus_sivu', function() {
     HelloWorldController::listaus_sivu();
   });
-  $routes->get('/reseptin_esittely', function(){
-    HelloWorldController::reseptin_esittely();
+  $routes->get('/resepti', function(){
+    HelloWorldController::resepti();
   });
   $routes->get('/login', function(){
     HelloWorldController::login();

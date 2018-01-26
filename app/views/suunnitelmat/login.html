@@ -6,6 +6,10 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" type="text/css">
+
+
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,5 +17,23 @@ and open the template in the editor.
     <body>
         <div>TODO write content</div>
         <h1>kirjautuminen</h1>
+        <h1>Kirjaudu sisään</h1>
+
+  <!-- Kaikki lomakkeen elementit form-tagin sisään -->
+  <form>
+    <!-- Tekstikenttä käyttäjätunnukselle -->
+    <div class="form-group">
+      <label>Käyttäjätunnus</label>
+      <input class="form-control" type="text">
+    </div>
+
+    <!-- Salasanakenttä salasanalle -->
+    <div class="form-group">
+      <label>Salasana</label>
+      <input class="form-control" type="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+  </form>
     </body>
 </html>

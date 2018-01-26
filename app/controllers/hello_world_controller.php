@@ -13,11 +13,11 @@
     }
     
     public static function listaus_sivu(){
-      View::make('suunnitelmat/listaussivu.html');
+      View::make('suunnitelmat/listaus_sivu.html');
     }
     
-    public static function reseptin_esittely(){
-      View::make('suunnitelmat/reseptin_esittely.html');
+    public static function resepti(){
+      View::make('suunnitelmat/resepti.html');
     }
     
     public static function login(){
