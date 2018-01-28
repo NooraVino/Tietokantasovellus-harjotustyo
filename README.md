@@ -1,8 +1,7 @@
 # Tietokantasovelluksen esittelysivu
 
 Yleisiä linkkejä:
-
-* [http://vino.users.cs.helsinki.fi/tikaso/]
+* [http://vino.users.cs.helsinki.fi/tikaso/etusivu]
 * [http://vino.users.cs.helsinki.fi/tikaso/listaus_sivu]
 * [http://vino.users.cs.helsinki.fi/tikaso/resepti]
 * [http://vino.users.cs.helsinki.fi/tikaso/login]

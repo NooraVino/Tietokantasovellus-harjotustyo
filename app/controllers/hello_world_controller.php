@@ -20,6 +20,10 @@
       View::make('suunnitelmat/resepti.html');
     }
     
+     public static function etusivu(){
+      View::make('suunnitelmat/etusivu.html');
+    }
+    
     public static function login(){
       View::make('suunnitelmat/login.html');
     }
