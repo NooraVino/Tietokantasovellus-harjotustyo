@@ -11,8 +11,18 @@ CREATE TABLE Kayttaja(
 );
 
 CREATE TABLE Resepti(
-nimi SERIAL PRIMARY KEY,
-pvm date,
+tunnus SERIAL PRIMARY KEY,
+nimi varchar(50),
 valmistus_aika INTEGER,
 valmistusohje varchar(2000)
+);
+
+CREATE TABLE RuokaAine(
+  tunnus SERIAL PRIMARY KEY,
+  nimi varchar(50)
+);
+
+CREATE TABLE RuokaLista(
+  tunnus SERIAL PRIMARY KEY,
+  nimi varchar(50)
 );
