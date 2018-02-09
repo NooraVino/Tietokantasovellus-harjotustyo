@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa reseptiä</h1>
+
+  <form method="post" action="{{base_path}}/resepti/edit">
+    <div class="form-group">
+      <label>Reseptin nimi</label>
+     <textarea name="nimi" class="form-control">{{resepti.nimi}}</textarea>
+      
+    </div>
+
+    <div class="form-group">
+      <label>Valmistusaika</label>
+     <textarea name="valmisaika" class="form-control">{{resepti.valmistusaika}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Valmistusohje</label>
+      <textarea name="valmistusohje" class="form-control">{{resepti.valmistusohje}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/edit" style="display: inline-block;">
+      <button type="submit" class="btn btn-danger">Talenna muutokset</button>
+    </div>
+  </form>
+  
+  <form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+  
+{% endblock %}

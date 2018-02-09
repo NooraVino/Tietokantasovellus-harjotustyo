@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Reseptin nimi</h1>
+  <h1>{{resepti.nimi}}</h1>
+  
   
   <p>
     <button class="btn btn-danger">Poista</button> 
-    <a href="#" class="btn btn-default">Muokkaa</a>
+    <a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a>
     <button class="btn btn-danger">Lisää ruokalistaan</button> 
   </p>
   
   <ul>
-    <li><strong>valmistusaika:</strong>30</li>
+    <li><strong>valmistusaika</strong>{{resepti.valmistusaika}}</li>
+    
     <li><strong>kategoria:</strong>pääruoka</li>
    
   </ul>
  
   <p>
- Reseptin valmistusohje
+ {{resepti.valmistusohje}}
+ 
   </p>
 {% endblock %}

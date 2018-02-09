@@ -7,16 +7,15 @@ require 'app/models/resepti.php';
     }
 
     public static function sandbox(){
-    
-    $resepti = resepti::haeResepti(2);
     $kaikki = resepti::haeKaikki();
+    $yksi = resepti::haeResepti(1);
     Kint::dump($kaikki);
-    Kint::dump($resepti);
+    Kint::dump($yksi);
+   
   
     }
-    
-    public static function listaus_sivu(){
-      View::make('suunnitelmat/listaus_sivu.html');
+    public static function uusi(){
+      View::make('suunnitelmat/uusi.html');
     }
     
     public static function resepti(){
@@ -29,5 +28,8 @@ require 'app/models/resepti.php';
     
     public static function login(){
       View::make('suunnitelmat/login.html');
+    }
+    public static function ruokaLista(){
+      View::make('suunnitelmat/ruokaLista.html');
     }
   }

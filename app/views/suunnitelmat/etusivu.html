@@ -2,7 +2,7 @@
 {% block content %}
   
   <p>
-    <button class="btn btn-success">Lisää Resepti</button>
+    <a href="{{base_path}}/resepti/uusi" class="btn btn-success">Lisää resepti</a>
   </p>
   
   
@@ -14,7 +14,7 @@
         <th>valmistusaika</th>
         <th>kategoria</th>
         <th>muokkaa reseptiä </th>
-        <th>lisää ruokalistaan </th> 
+        <th>Poista </th> 
       </tr>
     </thead>
     <tbody>
@@ -22,7 +22,11 @@
       <tr>
           <td><a href="{{base_path}}/resepti/{{resepti.tunnus}}">{{resepti.nimi}}</td>
           <td>{{resepti.valmistusaika}}</td>
-          <td>{{resepti.publisher}}</td>
+          <td>{{resepti.valmistusohje}}</td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a></td>
+          <td><form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form></td>
         </tr>
      {% endfor %}
     </tbody>

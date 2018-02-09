@@ -13,7 +13,7 @@ CREATE TABLE Kayttaja(
 CREATE TABLE Resepti(
 tunnus SERIAL PRIMARY KEY,
 nimi varchar(50),
-valmistus_aika INTEGER,
+valmistusaika INTEGER,
 valmistusohje varchar(2000)
 );
 

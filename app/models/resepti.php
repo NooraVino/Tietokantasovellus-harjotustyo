@@ -22,7 +22,8 @@ public function __construct($attributes){
       $reseptit[] = new Resepti (array(
         'tunnus' => $row['tunnus'],
         'nimi' => $row['nimi'],
-        'valmistusaika' => $row['valmistusaika']     
+        'valmistusaika' => $row['valmistusaika'], 
+        'valmistusohje' => $row['valmistusohje']      
         ));
     }
 
@@ -48,7 +49,36 @@ public function __construct($attributes){
     return null;
   }
   
- 
+  public function tallenna(){
+                                                                                                      
+    $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, valmistusaika, valmistusohje) VALUES (:nimi, :valmistusaika, :valmistusohje) RETURNING tunnus');
+   
+    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje));
+  
+    $row = $query->fetch();
+
+    $this->tunnus = $row['tunnus'];
+    
+  }
+  
+ public function update(){
+                                                                                                      
+    $query = DB::connection()->prepare('UPDATE Resepti (nimi, valmistusaika, valmistusohje) VALUES (:nimi, :valmistusaika, :valmistusohje) RETURNING tunnus');
+   
+    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje));
+  
+    $row = $query->fetch();
+
+    $this->tunnus = $row['tunnus'];
 }
 
+public function destroy(){
+                                                                                                      
+    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus=:tunnus') ;
+    $row = $query->fetch();
+    $this->tunnus = $row['tunnus'];
+
+}
+
+}
 
