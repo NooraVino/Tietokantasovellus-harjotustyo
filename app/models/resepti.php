@@ -6,6 +6,7 @@ class Resepti extends BaseModel{
 
 public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_nimi');
   }
 
  
@@ -49,7 +50,7 @@ public function __construct($attributes){
     return null;
   }
   
-  public function tallenna(){
+  public function save(){
                                                                                                       
     $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, valmistusaika, valmistusohje) VALUES (:nimi, :valmistusaika, :valmistusohje) RETURNING tunnus');
    
@@ -63,22 +64,19 @@ public function __construct($attributes){
   
  public function update(){
                                                                                                       
-    $query = DB::connection()->prepare('UPDATE Resepti (nimi, valmistusaika, valmistusohje) VALUES (:nimi, :valmistusaika, :valmistusohje) RETURNING tunnus');
-   
-    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje));
-  
-    $row = $query->fetch();
-
-    $this->tunnus = $row['tunnus'];
+    $query = DB::connection()->prepare('UPDATE Resepti SET nimi = :nimi, valmistusaika = :valmistusaika, valmistusohje = :valmistusohje WHERE tunnus = :tunnus ');
+    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje, 'tunnus' => $this->tunnus ));
+    
 }
 
 public function destroy(){
                                                                                                       
-    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus=:tunnus') ;
-    $row = $query->fetch();
-    $this->tunnus = $row['tunnus'];
-
+    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus=:tunnus');
+    $query->execute(array('tunnus' => $this->tunnus ));
+ 
 }
+
+
 
 }
 

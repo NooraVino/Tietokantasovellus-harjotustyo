@@ -2,33 +2,35 @@
 {% block content %}
   
   <p>
+      
     <a href="{{base_path}}/resepti/uusi" class="btn btn-success">Lisää resepti</a>
   </p>
-  
-  
-  <table class="table table-bordered table-striped">
-      
+  <div class="alert alert-success">
+  {{message}}
+</div>
+
+  <table class="table table-bordered table-striped">   
     <thead>
       <tr>
         <th>Resepti</th>
-        <th>valmistusaika</th>
-        <th>kategoria</th>
-        <th>muokkaa reseptiä </th>
-        <th>Poista </th> 
+        <th>Valmistusaika</th>
+        <th>Muokkaa reseptiä</th>
+        <th>Poista</th> 
       </tr>
     </thead>
+    
     <tbody>
         {% for resepti in reseptit %}
       <tr>
           <td><a href="{{base_path}}/resepti/{{resepti.tunnus}}">{{resepti.nimi}}</td>
           <td>{{resepti.valmistusaika}}</td>
-          <td>{{resepti.valmistusohje}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a></td>
           <td><form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
-  <button type="submit" class="btn btn-danger">Poista</button>
-</form></td>
-        </tr>
+             <button type="submit" class="btn btn-danger">Poista</button></form></td>
+     </tr>
+    
      {% endfor %}
+     
     </tbody>
   </table>
 {% endblock %}

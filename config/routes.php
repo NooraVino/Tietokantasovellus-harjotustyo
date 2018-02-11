@@ -42,9 +42,10 @@ $routes->post('/resepti/:tunnus/edit', function($tunnus){
 });
 
 $routes->post('/resepti/:tunnus/destroy', function($tunnus){
-  // Pelin poisto
   ReseptiController::destroy($tunnus);
 });
-  
+  $routes->get('/resepti/:tunnus/destroy', function($tunnus){
+  ReseptiController::destroy($tunnus);
+});
   
    

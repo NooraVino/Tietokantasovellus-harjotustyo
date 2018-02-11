@@ -4,20 +4,18 @@
   
   
   <p>
-    <button class="btn btn-danger">Poista</button> 
     <a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a>
-    <button class="btn btn-danger">Lisää ruokalistaan</button> 
   </p>
   
   <ul>
     <li><strong>valmistusaika</strong>{{resepti.valmistusaika}}</li>
-    
-    <li><strong>kategoria:</strong>pääruoka</li>
-   
   </ul>
  
   <p>
  {{resepti.valmistusohje}}
  
   </p>
+  <div class="alert alert-success">
+  {{message}}
+</div>
 {% endblock %}

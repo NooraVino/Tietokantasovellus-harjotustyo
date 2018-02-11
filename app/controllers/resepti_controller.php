@@ -22,10 +22,18 @@ class ReseptiController extends BaseController {
             'valmistusaika' => $params['valmistusaika'],
             'valmistusohje' => $params['valmistusohje']
                ));
-         
-        Kint::dump($params);
-        $resepti->tallenna();
         
+       $errors = $resepti->errors();
+       
+       if(count($errors) == 0){
+       $resepti->save();
+       Redirect::to('/resepti/' . $resepti->tunnus, array('message' => 'Resepti on lisätty arkistoosi!'));
+    
+         }else{
+    
+        View::make('resepti/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
+      
     }
     public static function show($tunnus) {
        $resepti = resepti::haeResepti($tunnus);
@@ -49,13 +57,13 @@ class ReseptiController extends BaseController {
     );
     $resepti = new Resepti($attributes);
       $resepti->update();
+      Redirect::to('/resepti/' . $resepti->tunnus, array('message' => 'Reseptiä on muokattu onnistuneesti!'));
   }
   public static function destroy($tunnus){
-    $resepti = new Resepti(array('tunnus' => $tunnus));
+    $resepti = resepti::haeResepti($tunnus);
     $resepti->destroy($tunnus);
 
-    // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
-    Redirect::to('/suunnitelmat/etusivu.html', array('message' => 'Peli on poistettu onnistuneesti!'));
+    Redirect::to('/etusivu', array('message' => 'Resepti on poistettu onnistuneesti!'));
   }
 
   
