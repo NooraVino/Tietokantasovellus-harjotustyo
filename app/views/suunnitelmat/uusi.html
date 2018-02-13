@@ -2,22 +2,31 @@
 {% block content %}
   <h1>Luo uusi resepti</h1>
   
+  {% if errors %}
+    <div class="alert alert-danger">
+      
+          {% for error in errors %}
+          {{error}}
+        {% endfor %}
+      
+    </div>
+  {% endif %}
 
 
   <form method="post" action="{{base_path}}/resepti">
     <div class="form-group">
       <label>Nimi</label>
-      <input name="nimi" class="form-control" type="text">
+      <input name="nimi" class="form-control" value="{{resepti.nimi}}" type="text">
     </div>
 
     <div class="form-group">
       <label>Valmistusaika</label>
-      <input name="valmistusaika" class="form-control" type="text">
+      <input name="valmistusaika" class="form-control" value="{{resepti.valmistusaika}}" type="text">
     </div>
 
     <div class="form-group">
       <label>Valmistusohje</label>
-      <textarea name="valmistusohje" class="form-control"></textarea>
+      <textarea name="valmistusohje" class="form-control">{{resepti.valmistusohje}}</textarea>
     </div>
 
     <div class="form-group">

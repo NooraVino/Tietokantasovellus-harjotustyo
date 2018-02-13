@@ -16,12 +16,24 @@ class BaseModel {
         }
     }
 
-    public function validate_nimi($string, $length) {
+    public function validate_nimi() {
+        $errors = array();
         if ($this->nimi == '' || $this->nimi == null) {
             $errors[] = 'Nimi ei saa olla tyhjä!';
         }
         if (strlen($this->nimi) < 3) {
             $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        return $errors;
+    }
+    
+    public function validate_valmistusaika() {
+        $errors = array();
+        if ($this->valmistusaika == '' || $this->valmistusaika == null) {
+            $errors[] = 'Ilmoita valmistusaika numeroin!';
+        }
+        if (is_numeric($this->valmistusaika) ==false ) {
+            $errors[] = 'Valmistusaika tulee ilmoittaa numeroin (esim: 30';
         }
         return $errors;
     }

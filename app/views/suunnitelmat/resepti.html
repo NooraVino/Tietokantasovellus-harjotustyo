@@ -15,7 +15,17 @@
  {{resepti.valmistusohje}}
  
   </p>
+  
+  {% if message %}
   <div class="alert alert-success">
   {{message}}
 </div>
+   {% endif %}
+   
+  {% if errors %}
+  <div class="alert alert-success">
+  {{errors}}
+</div>
+   {% endif %} 
+   
 {% endblock %}

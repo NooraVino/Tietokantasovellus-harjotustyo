@@ -5,15 +5,16 @@
       
     <a href="{{base_path}}/resepti/uusi" class="btn btn-success">Lisää resepti</a>
   </p>
+  {% if message %}
   <div class="alert alert-success">
   {{message}}
 </div>
-
+  {% endif %}
   <table class="table table-bordered table-striped">   
     <thead>
       <tr>
         <th>Resepti</th>
-        <th>Valmistusaika</th>
+        <th>Valmistusaika/min</th>
         <th>Muokkaa reseptiä</th>
         <th>Poista</th> 
       </tr>

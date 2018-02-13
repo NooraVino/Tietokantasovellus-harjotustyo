@@ -6,7 +6,7 @@ class Resepti extends BaseModel{
 
 public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_nimi');
+    $this->validators = array('validate_nimi', 'validate_valmistusaika');
   }
 
  
@@ -71,7 +71,7 @@ public function __construct($attributes){
 
 public function destroy(){
                                                                                                       
-    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus=:tunnus');
+    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus = :tunnus');
     $query->execute(array('tunnus' => $this->tunnus ));
  
 }
