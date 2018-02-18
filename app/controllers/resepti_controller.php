@@ -1,11 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 require 'app/models/resepti.php';
+require 'app/models/kategoria.php';
 
 class ReseptiController extends BaseController {
 
@@ -16,13 +12,15 @@ class ReseptiController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-
-        $resepti = new Resepti(array(
+        $kategoria = $params['kategoria'];
+        $attributes = array(
             'nimi' => $params['nimi'],
             'valmistusaika' => $params['valmistusaika'],
+            'kategoria' => $kategoria,
             'valmistusohje' => $params['valmistusohje']
-        ));
+        );
 
+        $resepti = new Resepti($attributes);
         $errors = $resepti->errors();
 
         if (count($errors) == 0) {
@@ -39,36 +37,40 @@ class ReseptiController extends BaseController {
     }
 
     public static function luoUusi() {
-        View::make('suunnitelmat/uusi.html');
+        $kategoriat = kategoria::haeKaikki();
+        View::make('suunnitelmat/uusi.html', array('kategoriat' => $kategoriat));
     }
 
     public static function edit($tunnus) {
         $resepti = resepti::haeResepti($tunnus);
-        View::make('suunnitelmat/edit.html', array('resepti' => $resepti));
+        $kategoriat = kategoria::haeKaikki();
+        View::make('suunnitelmat/edit.html', array('resepti' => $resepti, 'kategoriat' => $kategoriat));
     }
 
     public static function update($tunnus) {
         $params = $_POST;
+        $kategoria = $params['kategoria'];
 
         $attributes = array(
             'tunnus' => $tunnus,
             'nimi' => $params['nimi'],
-            'valmitusaika' => $params['valmistusaika'],
+            'valmistusaika' => $params['valmistusaika'],
+            'kategoria' => $kategoria,
             'valmistusohje' => $params['valmistusohje']
         );
         $resepti = new Resepti($attributes);
-
         $errors = $resepti->errors();
 
         if (count($errors) == 0) {
             $resepti->update();
             Redirect::to('/resepti/' . $resepti->tunnus, array('message' => 'Reseptiä on muokattu onnistuneesti!'));
         } else {
-            View::make('suunnitelmat/edit.html', array('errors' => $errors, 'resepti' => $resepti));
+            View::make('suunnitelmat/edit.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoria' => $kategoria));
         }
     }
 
     public static function destroy($tunnus) {
+        self::check_logged_in();
         $resepti = resepti::haeResepti($tunnus);
         $resepti->destroy($tunnus);
 

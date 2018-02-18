@@ -1,37 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-  
-  <p>
-      
+
+
+<p> 
     <a href="{{base_path}}/resepti/uusi" class="btn btn-success">Lisää resepti</a>
-  </p>
-  {% if message %}
-  <div class="alert alert-success">
-  {{message}}
+</p>
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
 </div>
-  {% endif %}
-  <table class="table table-bordered table-striped">   
+{% endif %}
+
+<table class="table table-bordered table-striped">   
     <thead>
-      <tr>
-        <th>Resepti</th>
-        <th>Valmistusaika/min</th>
-        <th>Muokkaa reseptiä</th>
-        <th>Poista</th> 
-      </tr>
+        <tr>
+            <th>Resepti</th>
+            <th>Valmistusaika/min</th>
+            <th>Kategoria</th>
+            <th>Muokkaa reseptiä</th>
+            <th>Poista</th> 
+        </tr>
     </thead>
-    
+
     <tbody>
         {% for resepti in reseptit %}
-      <tr>
-          <td><a href="{{base_path}}/resepti/{{resepti.tunnus}}">{{resepti.nimi}}</td>
-          <td>{{resepti.valmistusaika}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a></td>
-          <td><form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
-             <button type="submit" class="btn btn-danger">Poista</button></form></td>
-     </tr>
-    
-     {% endfor %}
-     
+        <tr>
+            <td><a href="{{base_path}}/resepti/{{resepti.tunnus}}">{{resepti.nimi}}</td>
+            <td>{{resepti.valmistusaika}}</td>
+            <td>{{resepti.kategoria}}</td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a></td>
+            <td><form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">Poista</button></form></td>
+        </tr>
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% endblock %}

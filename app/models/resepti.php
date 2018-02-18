@@ -1,82 +1,77 @@
 <?php
 
+class Resepti extends BaseModel {
 
-class Resepti extends BaseModel{
-    public $tunnus, $nimi, $valmistusaika, $valmistusohje;
+    public $tunnus, $nimi, $valmistusaika, $kategoria, $valmistusohje;
 
-public function __construct($attributes){
-    parent::__construct($attributes);
-    $this->validators = array('validate_nimi', 'validate_valmistusaika');
-  }
-
- 
- public static function haeKaikki(){
- 
-    $query = DB::connection()->prepare('SELECT * FROM Resepti');
-    $query->execute();
-    $rows = $query->fetchAll();
-    $reseptit = array();
-
-  
-    foreach($rows as $row){
-     
-      $reseptit[] = new Resepti (array(
-        'tunnus' => $row['tunnus'],
-        'nimi' => $row['nimi'],
-        'valmistusaika' => $row['valmistusaika'], 
-        'valmistusohje' => $row['valmistusohje']      
-        ));
+    public function __construct($attributes) {
+        parent::__construct($attributes);
+        $this->validators = array('validate_nimi', 'validate_valmistusaika');
     }
 
-    return $reseptit;
-  }
-  
-  public static function haeResepti($tunnus){
-    $query = DB::connection()->prepare('SELECT * FROM Resepti WHERE tunnus = :tunnus LIMIT 1');
-    $query->execute(array('tunnus' => $tunnus));
-    $row = $query->fetch();
+    public static function haeKaikki() {
 
-    if($row){
-      $resepti = new Resepti(array(
-        'tunnus' => $row['tunnus'],
-        'nimi' => $row['nimi'],
-        'valmistusaika' => $row['valmistusaika'],
-        'valmistusohje' => $row['valmistusohje']
-        ));
+        $query = DB::connection()->prepare('SELECT * FROM Resepti');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $reseptit = array();
 
-      return $resepti;
+
+        foreach ($rows as $row) {
+
+            $reseptit[] = new Resepti(array(
+                'tunnus' => $row['tunnus'],
+                'nimi' => $row['nimi'],
+                'valmistusaika' => $row['valmistusaika'],
+                'kategoria' => $row['kategoria'],
+                'valmistusohje' => $row['valmistusohje']
+            ));
+        }
+
+        return $reseptit;
     }
 
-    return null;
-  }
-  
-  public function save(){
-                                                                                                      
-    $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, valmistusaika, valmistusohje) VALUES (:nimi, :valmistusaika, :valmistusohje) RETURNING tunnus');
-   
-    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje));
-  
-    $row = $query->fetch();
+    public static function haeResepti($tunnus) {
+        $query = DB::connection()->prepare('SELECT * FROM Resepti WHERE tunnus = :tunnus LIMIT 1');
+        $query->execute(array('tunnus' => $tunnus));
+        $row = $query->fetch();
 
-    $this->tunnus = $row['tunnus'];
-    
-  }
-  
- public function update(){
-                                                                                                      
-    $query = DB::connection()->prepare('UPDATE Resepti SET nimi = :nimi, valmistusaika = :valmistusaika, valmistusohje = :valmistusohje WHERE tunnus = :tunnus ');
-    $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'valmistusohje' => $this->valmistusohje, 'tunnus' => $this->tunnus ));
-    
+        if ($row) {
+            $resepti = new Resepti(array(
+                'tunnus' => $row['tunnus'],
+                'nimi' => $row['nimi'],
+                'valmistusaika' => $row['valmistusaika'],
+                'kategoria' => $row['kategoria'],
+                'valmistusohje' => $row['valmistusohje']
+            ));
+
+            return $resepti;
+        }
+
+        return null;
+    }
+
+    public function save() {
+
+        $query = DB::connection()->prepare('INSERT INTO Resepti (nimi, valmistusaika, kategoria, valmistusohje) VALUES (:nimi, :valmistusaika, :kategoria, :valmistusohje) RETURNING tunnus');
+
+        $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'kategoria' => $this->kategoria, 'valmistusohje' => $this->valmistusohje));
+
+        $row = $query->fetch();
+
+        $this->tunnus = $row['tunnus'];
+    }
+
+    public function update() {
+
+        $query = DB::connection()->prepare('UPDATE Resepti SET nimi = :nimi, valmistusaika = :valmistusaika, kategoria = :kategoria, valmistusohje = :valmistusohje WHERE tunnus = :tunnus ');
+        $query->execute(array('nimi' => $this->nimi, 'valmistusaika' => $this->valmistusaika, 'kategoria' => $this->kategoria, 'valmistusohje' => $this->valmistusohje, 'tunnus' => $this->tunnus));
+    }
+
+    public function destroy() {
+
+        $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus = :tunnus');
+        $query->execute(array('tunnus' => $this->tunnus));
+    }
+
 }
-
-public function destroy(){
-                                                                                                      
-    $query = DB::connection()->prepare('DELETE FROM Resepti WHERE tunnus = :tunnus');
-    $query->execute(array('tunnus' => $this->tunnus ));
- 
-}
-
-
-
-}
-

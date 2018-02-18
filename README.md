@@ -2,11 +2,9 @@
 
 Yleisiä linkkejä:
 * [http://vino.users.cs.helsinki.fi/tikaso/etusivu]
-* [http://vino.users.cs.helsinki.fi/tikaso/listaus_sivu]
-* [http://vino.users.cs.helsinki.fi/tikaso/resepti]
 * [http://vino.users.cs.helsinki.fi/tikaso/login]
 
-* [file:///home/noora/Tsoha-Bootstrap/doc/dokumetti.pdf]
+* [https://github.com/NooraVino/Tsoha-Bootstrap/blob/master/doc/Tietokantasovellus.pdf]
 
 ## Työn aihe
 

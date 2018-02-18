@@ -8,9 +8,9 @@ require 'app/models/resepti.php';
 
     public static function sandbox(){
     $kaikki = resepti::haeKaikki();
-    $yksi = resepti::haeResepti(1);
+  
     Kint::dump($kaikki);
-    Kint::dump($yksi);
+   
    
   
     }

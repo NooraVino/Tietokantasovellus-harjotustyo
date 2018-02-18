@@ -1,36 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa reseptiä</h1>
+<h1>Muokkaa reseptiä</h1>
 
-  <form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/edit">
+<form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/edit">
     <div class="form-group">
-      <label>Reseptin nimi</label>
-     <textarea name="nimi" class="form-control">{{resepti.nimi}}</textarea>
-      
+        <label>Reseptin nimi</label>
+        <textarea name="nimi" class="form-control">{{resepti.nimi}}</textarea>
     </div>
 
     <div class="form-group">
-      <label>Valmistusaika</label>
-     <textarea name="valmistusaika" class="form-control">{{resepti.valmistusaika}}</textarea>
+        <label>Valmistusaika</label>
+        <textarea name="valmistusaika" class="form-control">{{resepti.valmistusaika}}</textarea>
     </div>
 
     <div class="form-group">
-      <label>Valmistusohje</label>
-      <textarea name="valmistusohje" class="form-control">{{resepti.valmistusohje}}</textarea>
+        <label>Kategoria</label>
+        <select class="form-control" name="kategoria">
+            {% for kategoria in kategoriat %}
+            <option value="{{kategoria.tunnus}}">{{kategoria.nimi}}</option>
+            {% endfor %}
+        </select>
+    </div>  
+
+    <div class="form-group">
+        <label>Valmistusohje</label>
+        <textarea name="valmistusohje" class="form-control">{{resepti.valmistusohje}}</textarea>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-danger">Talenna muutokset</button>
+        <button type="submit" class="btn btn-danger">Tallenna muutokset</button>
     </div>
-  </form>
+</form>
+
+
 {% if errors %}
-    <div class="alert alert-danger">
-      
-          {% for error in errors %}
-          {{error}}
-        {% endfor %}
-      
-    </div>
-  {% endif %}
-  
+<div class="alert alert-danger">
+
+    {% for error in errors %}
+    {{error}}
+    {% endfor %}
+
+</div>
+{% endif %}
+
 {% endblock %}
