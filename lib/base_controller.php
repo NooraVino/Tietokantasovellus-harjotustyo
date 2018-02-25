@@ -18,7 +18,12 @@ class BaseController {
       Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään! Sen jälkeen voit poistaa reseptejä.'));
     }
     
-    }
     
-
+    }
+    public static function onkoKirjautunut() {
+        if(isset($_SESSION['user'])){
+       return true;
+    }
+     return false;
+    }
 }

@@ -7,7 +7,7 @@ class ReseptiController extends BaseController {
 
     public static function index() {
         $reseptit = resepti::haeKaikki();
-        View::make('suunnitelmat/etusivu.html', array('reseptit' => $reseptit));
+        View::make('etusivu/etusivu.html', array('reseptit' => $reseptit));
     }
 
     public static function store() {
@@ -27,24 +27,25 @@ class ReseptiController extends BaseController {
             $resepti->save();
             Redirect::to('/resepti/' . $resepti->tunnus, array('message' => 'Resepti on lisätty arkistoosi!'));
         } else {
-            View::make('suunnitelmat/uusi.html', array('errors' => $errors, 'resepti' => $resepti));
+            $kategoriat = kategoria::haeKaikki();
+            View::make('reseptiNakymat/uusi.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoriat' => $kategoriat));
         }
     }
 
     public static function show($tunnus) {
         $resepti = resepti::haeResepti($tunnus);
-        View::make('suunnitelmat/resepti.html', array('resepti' => $resepti));
+        View::make('reseptiNakymat/resepti.html', array('resepti' => $resepti));
     }
 
     public static function luoUusi() {
         $kategoriat = kategoria::haeKaikki();
-        View::make('suunnitelmat/uusi.html', array('kategoriat' => $kategoriat));
+        View::make('reseptiNakymat/uusi.html', array('kategoriat' => $kategoriat));
     }
 
     public static function edit($tunnus) {
         $resepti = resepti::haeResepti($tunnus);
         $kategoriat = kategoria::haeKaikki();
-        View::make('suunnitelmat/edit.html', array('resepti' => $resepti, 'kategoriat' => $kategoriat));
+        View::make('reseptiNakymat/edit.html', array('resepti' => $resepti, 'kategoriat' => $kategoriat));
     }
 
     public static function update($tunnus) {
@@ -63,9 +64,9 @@ class ReseptiController extends BaseController {
 
         if (count($errors) == 0) {
             $resepti->update();
-            Redirect::to('/resepti/' . $resepti->tunnus, array('message' => 'Reseptiä on muokattu onnistuneesti!'));
+            Redirect::to('/resepti/' . $resepti->tunnus, array( 'message' => 'Reseptiä on muokattu onnistuneesti!'));
         } else {
-            View::make('suunnitelmat/edit.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoria' => $kategoria));
+            View::make('reseptiNakymat/edit.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoria' => $kategoria));
         }
     }
 

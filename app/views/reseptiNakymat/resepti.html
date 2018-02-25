@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{resepti.nimi}}</h1>
+
+
+
+<a class="btn btn-primary" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a>
+
+{% if user_logged_in %}
+<form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button></form>
+
+{% endif %}
+
+
+
+<p>
+<ul>
+    <li><strong>Valmistusaika</strong>    {{resepti.valmistusaika}} <strong> minuuttia</strong></li>
+    <li><strong>Kategoria:</strong>   {{resepti.kategoria}}</li>
+</ul>
+
+
+
+    <strong>Valmisohje:  </strong> {{resepti.valmistusohje}}
+
+    <p>
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+{% if errors %}
+<div class="alert alert-success">
+    {{errors}}
+</div>
+{% endif %} 
+
+{% endblock %}

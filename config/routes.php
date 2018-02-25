@@ -1,18 +1,9 @@
 <?php
 
-$routes->get('/', function() {
-    HelloWorldController::index();
-});
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
-$routes->get('/login', function() {
-    HelloWorldController::login();
-});
-$routes->get('/ruokaLista', function() {
-    HelloWorldController::ruokaLista();
-});
 
+$routes->get('/hiekkalaatikko', function() {
+HelloWorldController::sandbox();
+});
 
 $routes->post('/resepti', function() {
     ReseptiController::store();
@@ -53,3 +44,16 @@ $routes->post('/logout', function() {
     UserController::logout();
 });
 
+
+$routes->get('/listaus', function() {
+    KategoriaController::index();
+});
+$routes->get('/listaus/uusi', function() {
+    KategoriaController::uusi();
+});
+$routes->post('/uusi', function() {
+    KategoriaController::store();
+});
+$routes->post('/listaus/:tunnus/destroy', function($tunnus) {
+    KategoriaController::destroy($tunnus);
+});

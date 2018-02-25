@@ -1,15 +1,12 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-class Kategoria extends Basemodel{
+
+class Kategoria extends BaseModel {
     public $tunnus, $nimi;
 
- public function _constructor($attributes) {
-     parent::_constructor($attributes);
+ public function __constructor($attributes) {
+     parent::__constructor($attributes);
+     $this->validators = array('validate_nimi');
  }
  public static function haeKaikki(){
  
@@ -46,5 +43,37 @@ class Kategoria extends Basemodel{
     return null;
   }
   
+  public function save() {
+
+        $query = DB::connection()->prepare('INSERT INTO Kategoria (nimi) VALUES (:nimi) RETURNING tunnus');
+
+        $query->execute(array('nimi' => $this->nimi));
+
+        $row = $query->fetch();
+
+        $this->tunnus = $row['tunnus'];
+    }
+public function destroy() {
+
+        $query = DB::connection()->prepare('DELETE FROM Kategoria WHERE tunnus = :tunnus');
+        $query->execute(array('tunnus' => $this->tunnus));
+    }
+    
+     public static function haePoistettava($tunnus) {
+        $query = DB::connection()->prepare('SELECT Kategoria.tunnus, Kategoria.nimi FROM Kategoria LEFT JOIN Resepti ON Resepti.kategoria = Kategoria.tunnus WHERE Resepti.kategoria is null AND Kategoria.tunnus = :tunnus');
+        $query->execute(array('tunnus' => $tunnus));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kategoria = new Kategoria(array(
+                'tunnus' => $row['tunnus'],
+                'nimi' => $row['nimi']
+            ));
+
+            return $kategoria;
+        }
+
+        return null;
+    }
 
 }

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<p> 
+    <a href="{{base_path}}/listaus/uusi" class="btn btn-success">Lisää kategoria</a>
+</p>
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+<table class="table table-bordered table-striped">   
+    <thead>
+        <tr>
+            <th>Kategoria</th>
+            <th>Tunnus</th>
+            <th>Poista</th> 
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for kategoria in kategoriat %}
+        <tr>
+            <td><a href="{{base_path}}/kategoria/{{kategoria.tunnus}}">{{kategoria.nimi}}</td>
+            <td>{{kategoria.tunnus}}</td>
+            <td><form method="post" action="{{base_path}}/listaus/{{kategoria.tunnus}}/destroy" style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">Poista</button></form></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

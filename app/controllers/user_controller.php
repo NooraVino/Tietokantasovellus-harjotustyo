@@ -1,11 +1,11 @@
 <?php
 
-require 'app/models/resepti.php';
+
 
 
 class UserController extends BaseController{
   public static function login(){
-      View::make('suunnitelmat/login.html');
+      View::make('kirjautuminen/login.html');
   }
   
   public static function logout(){
@@ -18,7 +18,7 @@ class UserController extends BaseController{
     $user = kayttaja::authenticate($params['nimi'], $params['salasana']);
 
     if(!$user){
-        View::make('suunnitelmat/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
+        View::make('kirjautuminen/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
     }else{
      $_SESSION['user'] = $user->tunnus;
       Redirect::to('/etusivu', array('message' => 'Tervetuloa takaisin ' . $user->nimi . '!'));

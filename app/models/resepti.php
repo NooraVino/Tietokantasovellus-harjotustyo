@@ -11,7 +11,7 @@ class Resepti extends BaseModel {
 
     public static function haeKaikki() {
 
-        $query = DB::connection()->prepare('SELECT * FROM Resepti');
+        $query = DB::connection()->prepare('SELECT Resepti.tunnus, Resepti.nimi, Resepti.valmistusaika, Kategoria.nimi AS kategoria, Resepti.valmistusohje FROM Resepti INNER JOIN Kategoria ON Kategoria.tunnus = Resepti.kategoria;');
         $query->execute();
         $rows = $query->fetchAll();
         $reseptit = array();
@@ -32,7 +32,7 @@ class Resepti extends BaseModel {
     }
 
     public static function haeResepti($tunnus) {
-        $query = DB::connection()->prepare('SELECT * FROM Resepti WHERE tunnus = :tunnus LIMIT 1');
+        $query = DB::connection()->prepare('SELECT Resepti.tunnus, Resepti.nimi, Resepti.valmistusaika, Kategoria.nimi AS kategoria, Resepti.valmistusohje  FROM Resepti INNER JOIN Kategoria ON Kategoria.tunnus = Resepti.kategoria WHERE Resepti.tunnus = :tunnus;');
         $query->execute(array('tunnus' => $tunnus));
         $row = $query->fetch();
 
