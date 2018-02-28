@@ -1,16 +1,12 @@
+
 {% extends "base.html" %}
 {% block content %}
 
 
-<p> 
-    <a href="{{base_path}}/resepti/uusi" class="btn btn-success">Lisää resepti</a>
-</p>
+ 
+<h1>Tervetuloa Reseptiarkistoon!</h1> 
+<p>Kirjaudu sisään, jotta pääset tarkastelemaan omia reseptejäsi sekä lisäämään uusia.</p>
 
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
 
 <table class="table table-bordered table-striped">   
     <thead>
@@ -18,23 +14,27 @@
             <th>Resepti</th>
             <th>Valmistusaika/min</th>
             <th>Kategoria</th>
-            <th>Muokkaa reseptiä</th>
-            <th>Poista</th> 
+            <th>Lisännyt</th>
         </tr>
     </thead>
-
     <tbody>
         {% for resepti in reseptit %}
         <tr>
             <td><a href="{{base_path}}/resepti/{{resepti.tunnus}}">{{resepti.nimi}}</td>
             <td>{{resepti.valmistusaika}}</td>
             <td>{{resepti.kategoria}}</td>
-            <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.tunnus}}/edit">Muokkaa</a></td>
-            <td><form method="post" action="{{base_path}}/resepti/{{resepti.tunnus}}/destroy" style="display: inline-block;">
-                    <button type="submit" class="btn btn-danger">Poista</button></form></td>
-
+            <td>{{resepti.kayttaja}}</td>
+            
         </tr>
         {% endfor %}
+    
     </tbody>
+    
+    {% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
 </table>
+
 {% endblock %}

@@ -11,13 +11,13 @@ $routes->post('/resepti', function() {
 $routes->get('/resepti/uusi', function() {
     ReseptiController::luoUusi();
 });
-$routes->get('/resepti', function() {
-    ReseptiController::index();
+$routes->get('/', function() {
+    ReseptiController::alku();
 });
 $routes->get('/resepti/:tunnus', function($tunnus) {
     ReseptiController::show($tunnus);
 });
-$routes->get('/etusivu', function() {
+$routes->get('/index', function() {
     ReseptiController::index();
 });
 $routes->get('/resepti/:tunnus/edit', function($tunnus) {

@@ -8,10 +8,7 @@
 
     public static function sandbox(){
     $kaikki = resepti::haeKaikki();
-  
     Kint::dump($kaikki);
-   
-   
   
     }
     public static function uusi(){

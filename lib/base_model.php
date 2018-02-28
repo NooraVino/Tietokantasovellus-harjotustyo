@@ -24,7 +24,13 @@ class BaseModel {
         if (strlen($this->nimi) < 3) {
             $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
         }
-        return $errors;
+      
+    }
+    public function validate_tuplat() {
+        if (resepti::haeNimella($this->nimi) != null) {
+            $errors[] = "Nimellä on jo resepti";
+        }
+       return $errors; 
     }
     
     public function validate_valmistusaika() {

@@ -5,17 +5,26 @@ require 'app/models/kategoria.php';
 
 class ReseptiController extends BaseController {
 
-    public static function index() {
-        $reseptit = resepti::haeKaikki();
-        View::make('etusivu/etusivu.html', array('reseptit' => $reseptit));
+    public static function alku() { 
+       $reseptit = resepti::haeKaikki();
+        View::make('etusivu/etusivu.html',  array('reseptit' => $reseptit));
     }
-
+    
+    
+    public static function index() {
+        $kayttaja= $_SESSION['user'];
+        $reseptit = resepti::haeKaikkiKayttajan($kayttaja);
+        View::make('etusivu/resepti_listaus.html', array('reseptit' => $reseptit));
+    }
+    
     public static function store() {
         $params = $_POST;
         $kategoria = $params['kategoria'];
+        $kayttaja = $_SESSION['user'];
         $attributes = array(
             'nimi' => $params['nimi'],
             'valmistusaika' => $params['valmistusaika'],
+            'kayttaja' => $kayttaja,
             'kategoria' => $kategoria,
             'valmistusohje' => $params['valmistusohje']
         );
@@ -61,12 +70,16 @@ class ReseptiController extends BaseController {
         );
         $resepti = new Resepti($attributes);
         $errors = $resepti->errors();
-
+if ('nimi' != $this->nimi) {
+    
+}
+        
         if (count($errors) == 0) {
             $resepti->update();
             Redirect::to('/resepti/' . $resepti->tunnus, array( 'message' => 'Reseptiä on muokattu onnistuneesti!'));
         } else {
-            View::make('reseptiNakymat/edit.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoria' => $kategoria));
+            $kategoriat = kategoria::haeKaikki();
+            View::make('reseptiNakymat/edit.html', array('errors' => $errors, 'resepti' => $resepti, 'kategoriat' => $kategoriat));
         }
     }
 
@@ -75,7 +88,7 @@ class ReseptiController extends BaseController {
         $resepti = resepti::haeResepti($tunnus);
         $resepti->destroy($tunnus);
 
-        Redirect::to('/etusivu', array('message' => 'Resepti on poistettu onnistuneesti!'));
+        Redirect::to('/index', array('message' => 'Resepti on poistettu onnistuneesti!'));
     }
 
 }

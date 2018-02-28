@@ -20,15 +20,14 @@ class KategoriaController extends BaseController {
         );
 
         $kategoria = new Kategoria($attributes);
-        $errors = 0;  // $kategoria->errors();
+        $errors = $kategoria->validate_nimi();
 
-       // if (count($errors) == 0) {
+        if (count($errors) == 0) {
             $kategoria->save();
             Redirect::to('/listaus', array('message' => 'Kategoria on lisätty onnistuneesti!'));
-       // } else {
-
-           // View::make('kategoriat/uusi.html', array('errors' => $errors, 'kategoria' => $kategoria));
-       // }
+        } else {
+            View::make('kategoriat/uusi.html', array('errors' => $errors, 'kategoria' => $kategoria));
+        }
     }
 
     public static function destroy($tunnus) {
@@ -38,7 +37,7 @@ class KategoriaController extends BaseController {
             Redirect::to('/listaus', array('message' => 'Kategoria on poistettu onnistuneesti!'));
         } else {
             $kategoriat = Kategoria::haeKaikki();
-            View::make('kategoriat/listaus.html', array('message' => 'Kategoriaa ei voida poistaa!','kategoriat' => $kategoriat));
+            View::make('kategoriat/listaus.html', array('message' => 'Kategoriaa ei voida poistaa!', 'kategoriat' => $kategoriat));
         }
     }
 

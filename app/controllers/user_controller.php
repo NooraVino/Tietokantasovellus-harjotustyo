@@ -10,7 +10,7 @@ class UserController extends BaseController{
   
   public static function logout(){
     $_SESSION['user'] = null;
-    Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+    Redirect::to('/', array('message' => 'Olet kirjautunut ulos!'));
   }
   
   public static function handle_login(){
@@ -21,7 +21,7 @@ class UserController extends BaseController{
         View::make('kirjautuminen/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
     }else{
      $_SESSION['user'] = $user->tunnus;
-      Redirect::to('/etusivu', array('message' => 'Tervetuloa takaisin ' . $user->nimi . '!'));
+      Redirect::to('/index', array('message' => 'Tervetuloa takaisin ' . $user->nimi . '!'));
     }
   }
   
