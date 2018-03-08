@@ -12,15 +12,19 @@ class ReseptiController extends BaseController {
     
     
     public static function index() {
-        $kayttaja= $_SESSION['user'];
+        self::check_logged_in();
+        $kayttaja= $_SESSION['user']; //haetaan käyttäjän tunnus vain siinä tapauksessa että käyttäjä on edelleen kirjautuneena.
         $reseptit = resepti::haeKaikkiKayttajan($kayttaja);
         View::make('etusivu/resepti_listaus.html', array('reseptit' => $reseptit));
     }
     
     public static function store() {
+        self::check_logged_in();
+        $kayttaja = $_SESSION['user']; //haetaan käyttäjän tunnus vain siinä tapauksessa että käyttäjä on edelleen kirjautuneena.
+        
         $params = $_POST;
         $kategoria = $params['kategoria'];
-        $kayttaja = $_SESSION['user'];
+        
         $attributes = array(
             'nimi' => $params['nimi'],
             'valmistusaika' => $params['valmistusaika'],
@@ -68,11 +72,8 @@ class ReseptiController extends BaseController {
             'kategoria' => $kategoria,
             'valmistusohje' => $params['valmistusohje']
         );
-        $resepti = new Resepti($attributes);
+        $resepti = new Resepti($attributes); 
         $errors = $resepti->errors();
-if ('nimi' != $this->nimi) {
-    
-}
         
         if (count($errors) == 0) {
             $resepti->update();
@@ -84,7 +85,6 @@ if ('nimi' != $this->nimi) {
     }
 
     public static function destroy($tunnus) {
-        self::check_logged_in();
         $resepti = resepti::haeResepti($tunnus);
         $resepti->destroy($tunnus);
 

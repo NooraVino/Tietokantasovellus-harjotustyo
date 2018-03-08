@@ -6,7 +6,7 @@ class Resepti extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_valmistusaika');
+        $this->validators = array('validate_nimi', 'validate_valmistusaika', 'validate_tuplat');
     }
 
     public static function haeKaikki() {
@@ -74,9 +74,9 @@ class Resepti extends BaseModel {
         return null;
     }
 
-    public static function haeNimella($nimi) {
-        $query = DB::connection()->prepare('SELECT Resepti.nimi FROM Resepti WHERE Resepti.nimi = :nimi');
-        $query->execute(array('nimi' => $nimi));
+    public static function haeNimella($nimi, $kayttaja) {
+        $query = DB::connection()->prepare('SELECT Resepti.nimi FROM Resepti WHERE Resepti.nimi = :nimi AND Resepti.kayttaja = :kayttaja');
+        $query->execute(array('nimi' => $nimi, 'kayttaja' => $kayttaja));
         $row = $query->fetch();
 
         if ($row) {
