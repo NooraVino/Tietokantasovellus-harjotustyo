@@ -9,3 +9,5 @@ INSERT INTO Kayttaja (nimi, salasana) VALUES ('Ville', 'kokeilu');
 INSERT INTO Resepti (nimi, valmistusaika, kategoria, kayttaja, valmistusohje) VALUES ('Kanakeitto', 30, 1, 1, 'Osta kanaa');
 INSERT INTO Resepti (nimi, valmistusaika, kategoria, kayttaja, valmistusohje) VALUES ('Tofusalaatti', 15, 2, 2, 'Paista tofu');
 INSERT INTO Resepti (nimi, valmistusaika, kategoria, kayttaja, valmistusohje) VALUES ('Suklaakakku', 60, 3, 1, 'Syö suklaa');
+INSERT INTO Resepti (nimi, valmistusaika, kategoria, kayttaja, valmistusohje) VALUES ('Makaroonilaatikko', 50, 1, 2, 'Jauhelihaa ja makaroonia');
+INSERT INTO Resepti (nimi, valmistusaika, kategoria, kayttaja, valmistusohje) VALUES ('Mansikkarahka', 15, 3, 1, 'Mansikoita ja rahkaa');

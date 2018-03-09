@@ -83,9 +83,9 @@ class Resepti extends BaseModel {
             $resepti = new Resepti(array(
                 'nimi' => $row['nimi']
             ));
-            return $resepti;
+            return true;
         }
-        return null;
+        return false;
     }
 
     public function save() {

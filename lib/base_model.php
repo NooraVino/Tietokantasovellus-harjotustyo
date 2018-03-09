@@ -32,8 +32,8 @@ class BaseModel {
     
     public function validate_tuplat() { {
         $errors = array();
-        if (resepti::haeNimella($this->nimi, $this->kayttaja)!= null) {
-          $errors[] = "Nimellä on jo resepti";  
+        if (resepti::haeNimella($this->nimi, $this->kayttaja)== true) {
+          $errors[] = "Tietokannassa on jo samanniminen resepti.";  
         }
         return $errors;
     }
